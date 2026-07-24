@@ -5,6 +5,7 @@ import Dashboard from "./pages/Dashboard";
 import Pages from "./pages/Pages";
 import CreatePage from "./pages/CreatePage";
 import EditPage from "./pages/EditPage";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -12,11 +13,25 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
 
-        <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/pages" element={<Pages />} />
-        <Route path="/pages/create" element={<CreatePage />} />
-        <Route path="/pages/edit/:id" element={<EditPage />} />
+        <Route path="/login" element={
+                <Login /> } />
+        <Route path="/dashboard" element={
+            <ProtectedRoute>
+                <Dashboard />
+            </ProtectedRoute>
+        } />
+        <Route path="/pages" element={
+            <ProtectedRoute>
+                <Pages />
+            </ProtectedRoute>} />
+        <Route path="/pages/create" element={
+            <ProtectedRoute>
+                <CreatePage />
+            </ProtectedRoute>} />
+        <Route path="/pages/edit/:id" element={
+            <ProtectedRoute>
+                <EditPage />
+            </ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   );
