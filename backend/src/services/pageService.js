@@ -31,6 +31,99 @@ const createPage = async (pageData) => {
   };
 };
 
+const getAllPages = async () => {
+  const pages = await Page.find().sort({ createdAt: -1 });
+
+  return {
+    status: 200,
+    success: true,
+    data: pages,
+  };
+};
+
+const getPageById = async (id) => {
+  const page = await Page.findById(id);
+
+  if (!page) {
+    return {
+      status: 404,
+      success: false,
+      message: "Page not found.",
+    };
+  }
+
+  return {
+    status: 200,
+    success: true,
+    data: page,
+  };
+};
+
+const updatePage = async (id, pageData) => {
+  // Check if page exists
+  const existingPage = await Page.findById(id);
+
+  if (!existingPage) {
+    return {
+      status: 404,
+      success: false,
+      message: "Page not found.",
+    };
+  }
+
+  // Check if another page already uses the same slug
+  if (pageData.slug) {
+    const slugExists = await Page.findOne({
+      slug: pageData.slug,
+      _id: { $ne: id },
+    });
+
+    if (slugExists) {
+      return {
+        status: 409,
+        success: false,
+        message: "A page with this slug already exists.",
+      };
+    }
+  }
+
+  const updatedPage = await Page.findByIdAndUpdate(id, pageData, {
+    new: true,
+    runValidators: true,
+  });
+
+  return {
+    status: 200,
+    success: true,
+    message: "Page updated successfully.",
+    data: updatedPage,
+  };
+};
+
+const deletePage = async (id) => {
+  const page = await Page.findById(id);
+
+  if (!page) {
+    return {
+      status: 404,
+      success: false,
+      message: "Page not found.",
+    };
+  }
+
+  await Page.findByIdAndDelete(id);
+
+  return {
+    status: 200,
+    success: true,
+    message: "Page deleted successfully.",
+  };
+};
+
 module.exports = {
   createPage,
+  getAllPages,
+  getPageById,
+  updatePage,
+  deletePage,
 };
