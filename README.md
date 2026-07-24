@@ -208,33 +208,3 @@ http://localhost:5000
 
 ```
 
----
-
-## A few suggestions before the first push
-
-1. **Remove the temporary `/api/v1/profile` endpoint** before the final submission if it isn't used by the frontend.
-2. After creating the README, run:
-
-```bash
-git add README.md
-git commit --amend --no-edit
-```
-
-Since you haven't pushed yet, this will **add the README to your first commit**, keeping your Git history clean with a single initial commit instead of two.
-
-3. Before pushing, create the GitHub repository named:
-
-```
-renewcred-cms
-```
-
-without initializing it with a README, `.gitignore`, or license.
-
----
-
-I also have one more recommendation. Before your final submission tomorrow, we should revisit this README and enhance it with:
-- a **project architecture diagram**,
-- **database schema diagrams**,
-- and **screenshots/GIFs** of the admin dashboard once the frontend is ready.
-
-Those additions make a repository stand out and demonstrate that you can document software professionally, not just write code.
