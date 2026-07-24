@@ -1,0 +1,117 @@
+.pages-container {
+    width: 1100px;
+    margin: 40px auto;
+}
+
+.pages-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.pages-title {
+    font-size: 32px;
+}
+
+.table-container {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px #ccc;
+    overflow: hidden;
+}
+
+.pages-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.pages-table thead {
+    background: #007bff;
+    color: white;
+}
+
+.pages-table th,
+.pages-table td {
+    padding: 15px;
+    text-align: center;
+}
+
+.pages-table tbody tr {
+    border-bottom: 1px solid #ddd;
+}
+
+.pages-table tbody tr:hover {
+    background: #f5f5f5;
+}
+
+.status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.status.published {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status.draft {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.create-btn,
+.edit-btn,
+.delete-btn,
+.back-btn {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.create-btn {
+    background: #007bff;
+}
+
+.create-btn:hover {
+    background: #0056b3;
+}
+
+.edit-btn {
+    background: #28a745;
+    margin-right: 10px;
+}
+
+.edit-btn:hover {
+    background: #218838;
+}
+
+.delete-btn {
+    background: #dc3545;
+}
+
+.delete-btn:hover {
+    background: #c82333;
+}
+
+.back-btn {
+    background: #6c757d;
+    margin-bottom: 20px;
+}
+
+.back-btn:hover {
+    background: #545b62;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 50px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px #ccc;
+}

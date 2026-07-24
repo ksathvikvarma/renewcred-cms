@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
+import "./CreatePage.css";
 
 export default function CreatePage() {
   const navigate = useNavigate();
@@ -44,64 +45,91 @@ export default function CreatePage() {
   };
 
   return (
-    <div style={{ width: "500px", margin: "40px auto" }}>
-      <h1>Create Page</h1>
+    <div className="create-page-container">
 
-      <form onSubmit={handleSubmit}>
+      <button
+        className="secondary-btn"
+        onClick={() => navigate("/pages")}
+      >
+        ← Back to Pages
+      </button>
 
-        <label>Title</label>
-        <br />
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
+      <div className="page-card">
 
-        <br />
-        <br />
+        <h1>Create Page</h1>
 
-        <label>Slug</label>
-        <br />
-        <input
-          type="text"
-          value={slug}
-          onChange={(e) => setSlug(e.target.value)}
-          required
-        />
+        <p>Fill in the details below to create a new page.</p>
 
-        <br />
-        <br />
+        <form onSubmit={handleSubmit}>
 
-        <label>Status</label>
-        <br />
-        <select
-          value={status}
-          onChange={(e) => setStatus(e.target.value)}
-        >
-          <option value="draft">Draft</option>
-          <option value="published">Published</option>
-        </select>
+          <div className="form-group">
+            <label>Title</label>
 
-        <br />
-        <br />
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+            />
+          </div>
 
-        <label>Content</label>
-        <br />
-        <textarea
-          rows="6"
-          cols="50"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          required
-        />
+          <div className="form-group">
+            <label>Slug</label>
 
-        <br />
-        <br />
+            <input
+              type="text"
+              value={slug}
+              onChange={(e) => setSlug(e.target.value)}
+              required
+            />
+          </div>
 
-        <button type="submit">Create Page</button>
+          <div className="form-group">
+            <label>Status</label>
 
-      </form>
+            <select
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+            >
+              <option value="draft">Draft</option>
+              <option value="published">Published</option>
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label>Content</label>
+
+            <textarea
+              rows="8"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="button-group">
+
+            <button
+              type="button"
+              className="secondary-btn"
+              onClick={() => navigate("/pages")}
+            >
+              Cancel
+            </button>
+
+            <button
+              type="submit"
+              className="primary-btn"
+            >
+              Create Page
+            </button>
+
+          </div>
+
+        </form>
+
+      </div>
+
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
+import "./Login.css";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -34,34 +35,57 @@ export default function Login() {
   };
 
   return (
-    <div style={{ width: "300px", margin: "100px auto" }}>
-      <h2>Admin Login</h2>
+    <div className="login-container">
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-        />
+      <div className="login-card">
 
-        <br />
-        <br />
+        <h1>RenewCred CMS</h1>
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-        />
+        <p>Admin Login</p>
 
-        <br />
-        <br />
+        <form onSubmit={handleSubmit}>
 
-        <button type="submit">Login</button>
-      </form>
+          <div className="form-group">
+
+            <label>Email</label>
+
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+
+          </div>
+
+          <div className="form-group">
+
+            <label>Password</label>
+
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter your password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+
+          </div>
+
+          <button
+            type="submit"
+            className="login-btn"
+          >
+            Login
+          </button>
+
+        </form>
+
+      </div>
+
     </div>
   );
 }
