@@ -1,70 +1,219 @@
-# Getting Started with Create React App
+# RenewCred CMS Assignment
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+This project is a simple Content Management System (CMS) built using the MERN stack. It allows an administrator to log in, create, edit, update, and delete pages through an admin dashboard. The public frontend displays only published pages by fetching data from the backend APIs.
 
-In the project directory, you can run:
+The project is divided into three parts:
 
-### `npm start`
+- Backend API
+- Admin Frontend
+- Public Frontend
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Setup Instructions
 
-### `npm test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Node.js (v18 or later)
+- MongoDB
+- Git
 
-### `npm run build`
+### Clone the repository
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+git clone <repository-url>
+cd renewcred-cms
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Backend Setup
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+cd backend
+npm install
+```
 
-### `npm run eject`
+Create a `.env` file inside the backend folder.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Example:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```env
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Start the backend server:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+npm start
+```
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Admin Frontend Setup
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+cd admin-frontend
+npm install
+npm start
+```
 
-### Code Splitting
+The admin application runs on:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+http://localhost:3001
+```
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Public Frontend Setup
 
-### Making a Progressive Web App
+```bash
+cd public-frontend
+npm install
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The public application runs on:
 
-### Advanced Configuration
+```
+http://localhost:3000
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+## Technology Choices
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Backend
 
-### `npm run build` fails to minify
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT Authentication
+- bcryptjs
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Admin Frontend
+
+- React
+- React Router
+- Axios
+- CSS
+
+### Public Frontend
+
+- React
+- React Router
+- Axios
+- CSS
+
+---
+
+## Architecture Overview
+
+The application follows a simple client-server architecture.
+
+- The backend exposes REST APIs for authentication and page management.
+- The Admin Frontend is used by authenticated users to manage content.
+- The Public Frontend consumes public APIs and displays published pages.
+- MongoDB stores users and page data.
+
+```
+Admin Frontend
+       |
+       | Protected API
+       |
+Backend API
+       |
+       |
+   MongoDB
+       |
+       |
+Public Frontend
+```
+
+---
+
+## Assumptions
+
+- Only authenticated administrators can access the CMS.
+- Only published pages are visible on the public website.
+- Draft pages remain accessible only through the admin panel.
+- One administrator account is sufficient for this assignment.
+- MongoDB is available locally or through MongoDB Atlas.
+- The backend server is running before starting the frontend applications.
+- Page slugs are expected to be unique and are used for public page routing.
+- Each page currently stores its content as a single text block.
+- Authentication is handled using JWT, and the token is stored in the browser's local storage.
+- Modern browsers (Chrome, Edge, or Firefox) are assumed for running the application.
+## How to Run the Project
+
+### Step 1
+
+Start MongoDB.
+
+### Step 2
+
+Start the backend.
+
+```bash
+cd backend
+npm install
+npm start
+```
+
+### Step 3
+
+Start the admin frontend.
+
+```bash
+cd admin-frontend
+npm install
+npm start
+```
+
+### Step 4
+
+Start the public frontend.
+
+```bash
+cd public-frontend
+npm install
+npm start
+```
+
+### Step 5
+
+Open the applications.
+
+Admin:
+
+```
+http://localhost:3001
+```
+
+Public:
+
+```
+http://localhost:3000
+```
+
+Login using the administrator credentials and manage pages through the dashboard.
+
+## Demo Credentials
+
+Use the following administrator account to access the CMS.
+
+**Email**
+
+```
+admin@renewcred.com
+```
+
+**Password**
+
+```
+Admin@123
+```
