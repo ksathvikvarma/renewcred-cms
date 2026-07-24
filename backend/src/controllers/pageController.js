@@ -66,10 +66,38 @@ const deletePage = async (req, res) => {
   }
 };
 
+const getPageBySlug = async (req, res) => {
+  try {
+    const result = await pageService.getPageBySlug(req.params.slug);
+
+    res.status(result.status).json(result);
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+const getPublishedPages = async (req, res) => {
+  try {
+    const result = await pageService.getPublishedPages();
+
+    res.status(result.status).json(result);
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   createPage,
   getAllPages,
   getPageById,
   updatePage,
   deletePage,
+  getPageBySlug,
+  getPublishedPages
 };

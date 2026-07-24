@@ -120,10 +120,43 @@ const deletePage = async (id) => {
   };
 };
 
+const getPageBySlug = async (slug) => {
+  const page = await Page.findOne({
+    slug,
+    status: "published",
+  });
+
+  if (!page) {
+    return {
+      status: 404,
+      success: false,
+      message: "Page not found.",
+    };
+  }
+
+  return {
+    status: 200,
+    success: true,
+    data: page,
+  };
+};
+
+const getPublishedPages = async () => {
+  const pages = await Page.find({ status: "published" });
+
+  return {
+    status: 200,
+    success: true,
+    data: pages,
+  };
+};
+
 module.exports = {
   createPage,
   getAllPages,
   getPageById,
   updatePage,
   deletePage,
+  getPageBySlug,
+  getPublishedPages,
 };
