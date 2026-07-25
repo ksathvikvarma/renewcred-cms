@@ -178,29 +178,17 @@ http://localhost:5000
 
 ---
 
-## Current Development Progress
+## Current Limitations
 
-- ✅ Authentication Module
-- ✅ Authorization using JWT
-- ✅ Page Creation API
-- 🚧 Page Management APIs
-- 🚧 Admin Dashboard
-- 🚧 Public Website
+- The Admin CMS supports block-based content creation and editing.
+- The public frontend currently renders published pages but does not yet implement a complete block renderer for all supported block types.
 
----
+## Future Improvements
 
-## Future Enhancements
-
-- Rich Block Editor
-- Image Upload Support
-- SEO Metadata
-- Draft & Published Workflow
-- Search Functionality
-- Pagination
-- Role-Based Access Control
-- Media Library
-
----
+- Implement a dynamic Block Renderer for all content block types.
+- Integrate a rich text editor (TipTap or Editor.js).
+- Add drag-and-drop block reordering.
+- Improve public UI responsiveness and styling.
 
 ## Author
 
