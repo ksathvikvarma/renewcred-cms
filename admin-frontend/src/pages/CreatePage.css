@@ -77,3 +77,38 @@
 .secondary-btn:hover {
     background: #545b62;
 }
+
+.blocks-title {
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.block-card {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background: #fafafa;
+}
+
+.block-card h4 {
+    margin-bottom: 15px;
+}
+
+.block-actions {
+    margin-top: 15px;
+}
+
+.add-block-btn {
+    margin-bottom: 20px;
+}
+
+.block-select,
+.block-textarea {
+    width: 100%;
+}
+
+.block-textarea {
+    min-height: 120px;
+    resize: vertical;
+}

@@ -10,7 +10,34 @@ export default function EditPage() {
   const [title, setTitle] = useState("");
   const [slug, setSlug] = useState("");
   const [status, setStatus] = useState("draft");
-  const [content, setContent] = useState("");
+  const [blocks, setBlocks] = useState([
+    {
+      type: "paragraph",
+      content: "",
+    },
+  ]);
+
+  const addBlock = () => {
+    setBlocks([
+      ...blocks,
+      {
+        type: "paragraph",
+        content: "",
+      },
+    ]);
+  };
+
+  const removeBlock = (index) => {
+    const updatedBlocks = [...blocks];
+    updatedBlocks.splice(index, 1);
+    setBlocks(updatedBlocks);
+  };
+
+  const updateBlock = (index, field, value) => {
+    const updatedBlocks = [...blocks];
+    updatedBlocks[index][field] = value;
+    setBlocks(updatedBlocks);
+  };
 
   useEffect(() => {
     const fetchPage = async () => {
@@ -23,8 +50,15 @@ export default function EditPage() {
         setSlug(page.slug);
         setStatus(page.status);
 
-        if (page.blocks.length > 0) {
-            setContent(page.blocks[0].data.content);
+        if (page.blocks && page.blocks.length > 0) {
+
+          const loadedBlocks = page.blocks.map((block) => ({
+            type: block.type,
+            content: block.data.content,
+          }));
+
+          setBlocks(loadedBlocks);
+
         }
         } catch (error) {
         console.error(error);
@@ -41,15 +75,13 @@ export default function EditPage() {
       title,
       slug,
       status,
-      blocks: [
-        {
-          type: "text",
-          data: {
-            content,
-          },
-          order: 1,
+      blocks: blocks.map((block, index) => ({
+        type: block.type,
+        data: {
+          content: block.content,
         },
-      ],
+        order: index + 1,
+      })),
     };
 
     try {
@@ -117,16 +149,76 @@ export default function EditPage() {
             </select>
           </div>
 
-          <div className="form-group">
-            <label>Content</label>
+          <h3 className="blocks-title">Content Blocks</h3>
 
-            <textarea
-              rows="8"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              required
-            />
-          </div>
+          {blocks.map((block, index) => (
+
+            <div
+              key={index}
+              className="block-card"
+            >
+
+              <h4>Block {index + 1}</h4>
+
+              <div className="form-group">
+
+                <label>Block Type</label>
+
+                <select
+                  className="block-select"
+                  value={block.type}
+                  onChange={(e) =>
+                    updateBlock(index, "type", e.target.value)
+                  }
+                >
+                  <option value="heading">Heading</option>
+                  <option value="paragraph">Paragraph</option>
+                  <option value="equation">Equation</option>
+                </select>
+
+              </div>
+
+              <div className="form-group">
+
+                <label>Content</label>
+
+                <textarea
+                  className="block-textarea"
+                  value={block.content}
+                  onChange={(e) =>
+                    updateBlock(index, "content", e.target.value)
+                  }
+                  required
+                />
+
+              </div>
+
+              <div className="block-actions">
+
+                <button
+                  type="button"
+                  className="secondary-btn"
+                  onClick={() => removeBlock(index)}
+                >
+                  Remove Block
+                </button>
+
+              </div>
+
+            </div>
+
+          ))}
+
+          <button
+            type="button"
+            className="secondary-btn add-block-btn"
+            onClick={addBlock}
+          >
+            + Add Block
+          </button>
+
+          <br />
+          <br />
 
           <div className="button-group">
 
