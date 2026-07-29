@@ -1,0 +1,154 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: #f8fafc;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #1f2937;
+}
+
+/* Hero Section */
+
+.hero {
+    background-color: #ffffff;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 700px;
+    margin: auto;
+}
+
+.hero h1 {
+    font-size: 42px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 18px;
+    line-height: 1.7;
+    color: #4b5563;
+    margin-bottom: 35px;
+}
+
+.hero-btn {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #2563eb;
+    color: white;
+    padding: 14px 28px;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.hero-btn:hover {
+    background-color: #1d4ed8;
+}
+
+/* Features */
+
+.features {
+    padding: 70px 20px;
+}
+
+.features h2 {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.feature-grid {
+    max-width: 1100px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.feature-card {
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 25px;
+}
+
+.feature-card h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.feature-card p {
+    color: #4b5563;
+    line-height: 1.6;
+}
+
+/* Pages */
+
+.pages {
+    padding: 70px 20px;
+}
+
+.pages h2 {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.page-grid {
+    max-width: 1100px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.page-card {
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 25px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.page-card h3 {
+    margin-top: 0;
+}
+
+.page-card p {
+    color: #4b5563;
+    line-height: 1.6;
+    flex: 1;
+}
+
+.read-more {
+    text-decoration: none;
+    color: #2563eb;
+    font-weight: bold;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .page-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
