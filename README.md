@@ -1,176 +1,237 @@
 # RenewCred CMS
 
-A full-stack Content Management System (CMS) built with **Node.js, Express.js, MongoDB, and React**. The project provides a secure admin panel for managing website pages and a public frontend for displaying published content.
-
-> **Project Status:** 🚧 In Development
+A full-stack Content Management System (CMS) built using the MERN stack. The application allows administrators to create, edit, publish, and manage website pages through a secure admin dashboard, while visitors can access published pages through a public website.
 
 ---
 
 ## Features
 
-### Completed
+### Admin Dashboard
 
-- Secure Admin Registration (One-Time Registration)
-- Admin Login with JWT Authentication
-- Password Hashing using bcrypt
-- Protected API Routes
-- Create CMS Pages
-- MongoDB Database Integration
-- Layered Backend Architecture (Controller → Service → Model)
+- Secure administrator login using JWT authentication
+- Create, edit and delete pages
+- Save pages as Draft or Published
+- Block-based content editor
+  - Heading
+  - Paragraph
+  - Equation
+- Slug-based page management
+- Dashboard for managing all pages
 
-### In Progress
+### Public Website
 
-- Get All Pages API
-- Update Page API
-- Delete Page API
-- Admin Dashboard (React)
-- Public Website
-- Block-based Page Editor
+- Home page
+- Dynamic page rendering based on page slug
+- Displays only published pages
+- Responsive layout
+- Breadcrumb navigation
+- Clean content rendering using reusable block components
 
 ---
 
-## Tech Stack
+# Admin Login
 
-### Backend
+Use the following credentials to access the admin dashboard.
+
+Email:
+```
+admin@renewcred.com
+```
+
+Password:
+```
+Admin@123
+```
+
+> Replace the password above with the one seeded in your database.
+
+---
+
+# Technology Choices
+
+## Frontend
+
+- React.js
+- React Router DOM
+- Axios
+- CSS
+
+### Why React?
+
+React provides a component-based architecture that makes the application easier to organize and maintain. Reusable components such as the page renderer, layout, navbar, and footer help keep the UI modular.
+
+---
+
+## Backend
 
 - Node.js
 - Express.js
+
+### Why Express?
+
+Express offers a lightweight and flexible way to build REST APIs while keeping routing and middleware simple.
+
+---
+
+## Database
+
 - MongoDB
 - Mongoose
-- JSON Web Token (JWT)
-- bcrypt.js
-- dotenv
 
-### Frontend (Planned)
+### Why MongoDB?
 
-- React
-- Vite
-- Redux Toolkit
-- Tailwind CSS
+Since page content consists of different block types with varying structures, MongoDB's document model allows flexible storage without requiring multiple relational tables.
 
 ---
 
-## Project Structure
+## Authentication
 
-```
-renewcred-cms/
-│
-├── backend/
-│   ├── src/
-│   │   ├── config/
-│   │   ├── controllers/
-│   │   ├── middleware/
-│   │   ├── models/
-│   │   ├── routes/
-│   │   ├── services/
-│   │   ├── app.js
-│   │   └── server.js
-│   │
-│   ├── package.json
-│   └── .env.example
-│
-├── admin-frontend/
-├── public-frontend/
-├── docs/
-└── README.md
-```
+- JSON Web Tokens (JWT)
+- bcrypt
+
+### Why JWT?
+
+JWT enables stateless authentication for the admin dashboard. Protected routes can only be accessed by authenticated administrators while public content remains accessible without login.
 
 ---
 
-## Backend Architecture
+# Architecture Overview
+
+The project follows a client-server architecture.
 
 ```
-Client
-   │
-   ▼
-Routes
-   │
-   ▼
-Authentication Middleware
-   │
-   ▼
-Controllers
-   │
-   ▼
-Services
-   │
-   ▼
-Models
-   │
-   ▼
-MongoDB
+                Public Website
+                      │
+                      │
+               React Frontend
+                      │
+              REST API (Express)
+                      │
+        Controllers → Services → Models
+                      │
+                   MongoDB
 ```
 
-The project follows a layered architecture to separate routing, business logic, database operations, and authentication.
+### Frontend
+
+The frontend is divided into two separate applications:
+
+- Admin Frontend
+- Public Frontend
+
+This separation keeps administration features isolated from the public website and makes each application easier to maintain.
+
+### Backend
+
+The backend follows a layered architecture:
+
+- Routes handle API endpoints.
+- Controllers process incoming requests.
+- Services contain business logic.
+- Models interact with MongoDB.
+
+This separation keeps responsibilities clear and improves maintainability.
 
 ---
 
-## API Endpoints
+# Project Structure
 
-### Authentication
+```
+backend/
+    controllers/
+    middleware/
+    models/
+    routes/
+    services/
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/v1/auth/register` | Register the first admin |
-| POST | `/api/v1/auth/login` | Admin login |
+admin-frontend/
+    components/
+    pages/
+    services/
 
-### Pages
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/v1/pages` | Create a new page (Protected) |
-
-Additional CRUD APIs are currently under development.
-
----
-
-## Environment Variables
-
-Create a `.env` file inside the `backend` directory.
-
-```env
-PORT=5000
-
-MONGO_URI=mongodb://127.0.0.1:27017/renewcred_cms
-
-JWT_SECRET=your_secret_key
-
-NODE_ENV=development
+public-frontend/
+    components/
+    pages/
+    services/
 ```
 
 ---
 
-## Installation
+# Assumptions
 
-### Clone the repository
+The following assumptions were made during development:
+
+- Only authenticated administrators can create, edit, or delete pages.
+- Visitors can only access pages with the **Published** status.
+- Each page uses a unique slug for routing.
+- The homepage is part of the public website, while page content is managed through the CMS.
+- The content editor currently supports Heading, Paragraph, and Equation blocks.
+- Equations are displayed as formatted text blocks and are not rendered using a mathematical rendering library.
+- Uploaded media management was considered outside the scope of the current implementation.
+- The system is designed for a single administrator account.
+- Validation is performed on both the client and server wherever applicable.
+
+---
+
+# Setup Instructions
+
+## 1. Clone the repository
 
 ```bash
 git clone <repository-url>
 ```
 
-### Navigate to backend
+---
+
+## 2. Install Backend Dependencies
 
 ```bash
-cd renewcred-cms/backend
-```
-
-### Install dependencies
-
-```bash
+cd backend
 npm install
 ```
 
-### Start MongoDB
+Create a `.env` file.
 
-Ensure MongoDB is running locally.
+Example:
 
-### Start the development server
+```env
+PORT=5000
+
+MONGODB_URI=your_mongodb_connection_string
+
+JWT_SECRET=your_secret_key
+```
+
+---
+
+## 3. Install Admin Frontend
 
 ```bash
+cd admin-frontend
+npm install
+```
+
+---
+
+## 4. Install Public Frontend
+
+```bash
+cd public-frontend
+npm install
+```
+
+---
+
+# How to Run the Project
+
+## 1. Start the Backend
+
+```bash
+cd backend
 npm run dev
 ```
 
-The backend will run on:
+The backend will start on:
 
 ```
 http://localhost:5000
@@ -178,21 +239,69 @@ http://localhost:5000
 
 ---
 
-## Current Limitations
+## 2. Start the Admin Frontend
 
-- The Admin CMS supports block-based content creation and editing.
-- The public frontend currently renders published pages but does not yet implement a complete block renderer for all supported block types.
-
-## Future Improvements
-
-- Implement a dynamic Block Renderer for all content block types.
-- Integrate a rich text editor (TipTap or Editor.js).
-- Add drag-and-drop block reordering.
-- Improve public UI responsiveness and styling.
-
-## Author
-
-**Sathvik Varma Kutcharlapati**
-
+```bash
+cd admin-frontend
+npm start
 ```
 
+The admin dashboard will be available at:
+
+```
+http://localhost:3000
+```
+
+---
+
+## 3. Start the Public Frontend
+
+```bash
+cd public-frontend
+npm start
+```
+
+The public website will be available at:
+
+```
+http://localhost:3001
+```
+
+*(Use the port configured on your machine if it differs.)*
+# API Overview
+
+### Public APIs
+
+```
+GET /api/v1/pages/public
+GET /api/v1/pages/slug/:slug
+```
+
+### Protected APIs
+
+```
+POST   /api/v1/pages
+GET    /api/v1/pages
+GET    /api/v1/pages/:id
+PUT    /api/v1/pages/:id
+DELETE /api/v1/pages/:id
+```
+
+---
+
+# Future Improvements
+
+- Support additional block types such as Images and Lists
+- Rich text editing
+- Drag-and-drop block ordering
+- Media upload support
+- Search and filtering
+- Multiple administrator roles
+- Homepage content management through the CMS
+
+---
+
+# Author
+
+K.Sathvik Varma
+Developed as part of the RenewCred CMS assignment.
